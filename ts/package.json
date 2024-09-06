@@ -1,0 +1,28 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf ./src/artifacts ./target",
+    "codegen": "aztec codegen target --outdir src/artifacts",
+    "compile": "${AZTEC_NARGO:-aztec-nargo} compile",
+    "test": "NODE_NO_WARNINGS=1 node --experimental-vm-modules $(yarn bin jest) --no-cache --runInBand --config jest.integration.config.json",
+    "update": "aztec update --contract . && ./.github/scripts/update_contract.sh $(grep -oP 'tag\\s*=\\s*\"\\K[^\"]+' \"Nargo.toml\" | head -1)"
+  },
+  "dependencies": {
+    "@aztec/accounts": "^0.49.2",
+    "@aztec/aztec.js": "^0.49.2",
+    "@aztec/noir-contracts.js": "^0.49.2",
+    "@types/node": "^22.3.0",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testTimeout": 200000
+  }
+}
