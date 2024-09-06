@@ -134,7 +134,7 @@ contract Bet {
     // }
 
     #[aztec(private)]
-    fn claim_coins(amount_betted: U128, coin_betted: AztecAddress, recipient: AztecAddress) {
+    fn claim_coins(amount_betted: Field, coin_betted: AztecAddress, recipient: AztecAddress) {
         Bet::at(context.this_address())._give_rewards(amount_betted, coin_betted, recipient).enqueue(&mut context);
     }
 
